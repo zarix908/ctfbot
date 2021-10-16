@@ -8,7 +8,7 @@ from const import WEBHOOK_UPDATE_URL
 app = Flask(__name__)
 
 
-@app.post(WEBHOOK_UPDATE_URL)
+@app.route(WEBHOOK_UPDATE_URL, methods=['POST'])
 def update():
     if request.headers.get('content-type') != 'application/json':
         abort(403)
