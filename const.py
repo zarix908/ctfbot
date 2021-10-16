@@ -1,0 +1,1 @@
+WEBHOOK_UPDATE_URL = '/update'
