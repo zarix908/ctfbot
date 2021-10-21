@@ -18,7 +18,7 @@ def update():
         bot.process_new_updates([
             telebot.types.Update.de_json(json_string)
         ])
-        return ''
+        return 200
     except Exception as e:
         app.logger.error(f'process update failed: {e}')
         abort(500)
