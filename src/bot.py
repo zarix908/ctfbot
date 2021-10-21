@@ -1,7 +1,6 @@
 import telebot
 
 import mappers
-from mappers.user import from_json
 from notprovide.config import BOT_TOKEN
 
 bot = telebot.TeleBot(BOT_TOKEN)

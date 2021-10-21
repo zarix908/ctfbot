@@ -1,8 +1,7 @@
 from enum import Enum
 from typing import Optional
 
-import pydantic
-from pydantic import Field
+from pydantic import Field, constr
 from pydantic.dataclasses import dataclass
 
 
@@ -13,12 +12,12 @@ class UserState(Enum):
     READ_COURSE = 3
 
 
-CYRILLIC_NAME = pydantic.constr(regex=r'[А-Я][А-Яа-я\s]*')
+CYRILLIC_NAME = constr(regex=r'[А-Я][А-Яа-я\s]*')
 
 
 @dataclass
 class User:
-    id: int
+    tg_id: int
     tg_username: Optional[str] = Field(None)
     tg_first_name: Optional[str] = Field(None)
     tg_last_name: Optional[str] = Field(None)
@@ -28,7 +27,7 @@ class User:
     state: UserState = Field(UserState.SETUP_USERNAME)
 
     def __repr__(self):
-        return f'id {self.id}' \
+        return f'id {self.tg_id}' \
                f'uname: {self.tg_username}' \
                f'tg_fn: {self.tg_first_name}' \
                f'tg_ln: {self.tg_last_name}' \

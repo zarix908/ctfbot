@@ -9,8 +9,7 @@ def from_json(obj):
 
     get = partial(deep_get, obj)
 
-    user = User()
-    user.id = get('from.id')
+    user = User(tg_id=get('from.id'))
     user.tg_username = get('from.username')
     user.tg_first_name = get('from.first_name')
     user.tg_last_name = get('from.last_name')
