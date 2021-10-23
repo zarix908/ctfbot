@@ -15,3 +15,13 @@ class UserEntity(db.Base):
     last_name: Column(String)
     course: Column(Integer)
     state = Column(Enum(models.user.UserState.SETUP_USERNAME))
+
+    def __repr__(self):
+        return f'tg_id {self.tg_id}' \
+               f'uname: {self.tg_username}' \
+               f'tg_fn: {self.tg_first_name}' \
+               f'tg_ln: {self.tg_last_name}' \
+               f'fn: {self.first_name}' \
+               f'ln: {self.last_name}' \
+               f'course: {self.course}' \
+               f'state: {self.state}'

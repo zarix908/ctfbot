@@ -3,6 +3,7 @@ import time
 from app import app
 from bot import bot
 import const
+import db
 from notprovide import config
 
 
@@ -19,6 +20,7 @@ def run():
 
 
 def main():
+    db.init()
     app.run('0.0.0.0', 8080)
     # run()
 

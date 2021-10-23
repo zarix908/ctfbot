@@ -27,7 +27,7 @@ class User:
     state: UserState = Field(UserState.SETUP_USERNAME)
 
     def __repr__(self):
-        return f'id {self.tg_id}' \
+        return f'tg_id {self.tg_id}' \
                f'uname: {self.tg_username}' \
                f'tg_fn: {self.tg_first_name}' \
                f'tg_ln: {self.tg_last_name}' \
