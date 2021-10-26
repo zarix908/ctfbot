@@ -23,15 +23,13 @@ def from_json(obj):
 
 
 def to_entity(user):
-    entity = UserEntity()
-
-    entity.tg_id = user.tg_id
-    entity.tg_username = user.tg_username
-    entity.tg_first_name = user.tg_first_name
-    entity.tg_last_name = user.tg_last_name
-    entity.first_name = user.first_name
-    entity.last_name = user.tg_last_name
-    entity.course = user.course
-    entity.state = user.state
-
-    return entity
+    return UserEntity(
+        tg_id=user.tg_id,
+        tg_username=user.tg_username,
+        tg_first_name=user.tg_first_name,
+        tg_last_name=user.tg_last_name,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        course=user.course,
+        state=user.state
+    )

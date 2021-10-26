@@ -1,20 +1,18 @@
-from sqlalchemy import Column, Integer, String, Enum
-
-import db
 import models
+from db import db
 
 
-class UserEntity(db.Base):
+class UserEntity(db.Model):
     __tablename__ = 'users'
 
-    tg_id = Column(Integer, primary_key=True)
-    tg_username = Column(String)
-    tg_first_name = Column(String)
-    tg_last_name = Column(String)
-    first_name = Column(String)
-    last_name: Column(String)
-    course: Column(Integer)
-    state = Column(Enum(models.user.UserState))
+    tg_id = db.Column(db.Integer, primary_key=True)
+    tg_username = db.Column(db.String)
+    tg_first_name = db.Column(db.String)
+    tg_last_name = db.Column(db.String)
+    first_name = db.Column(db.String)
+    last_name: db.Column(db.String)
+    course: db.Column(db.Integer)
+    state = db.Column(db.Enum(models.user.UserState))
 
     def __repr__(self):
         return f'tg_id {self.tg_id}' \

@@ -1,15 +1,13 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base
+from flask_sqlalchemy import SQLAlchemy
 
-engine = None
-Base = declarative_base()
+db = SQLAlchemy()
 
 
-def init():
+def init(app):
     user = 'ctfbot'
     password = 'ctfbot'
     db_name = 'ctfbot'
 
-    global engine
-    engine = create_engine(f'postgresql://{user}:{password}@localhost:5432/{db_name}')
-    Base.metadata.create_all(engine)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@localhost:5432/{db_name}'
+    db = SQLAlchemy(app)
+    db.create_all()
