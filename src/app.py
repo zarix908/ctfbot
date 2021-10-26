@@ -2,12 +2,11 @@ import telebot
 from flask import request, Flask
 from werkzeug.exceptions import abort
 
-import bot
+from bot import bot
 from const import WEBHOOK_UPDATE_URL
 
 app = Flask(__name__)
-
-bot.create_context = app.app_context
+bot.db_context = app.app_context
 
 
 @app.route(WEBHOOK_UPDATE_URL, methods=['POST'])
@@ -17,7 +16,7 @@ def update():
 
     try:
         json_string = request.get_data().decode('utf-8')
-        bot.bot.process_new_updates([
+        bot.process_new_updates([
             telebot.types.Update.de_json(json_string)
         ])
         return ''
