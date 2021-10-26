@@ -6,7 +6,7 @@ from bot import bot
 from const import WEBHOOK_UPDATE_URL
 
 app = Flask(__name__)
-bot.db_context = app.app_context
+bot.setup(app.app_context, app.logger)
 
 
 @app.route(WEBHOOK_UPDATE_URL, methods=['POST'])

@@ -1,15 +1,7 @@
-import telebot
-
 import mappers
 from db import db
 from notprovide.config import BOT_TOKEN
-
-
-class TgBot(telebot.TeleBot):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.db_context = None
-
+from tgbot import TgBot
 
 bot = TgBot(BOT_TOKEN)
 
@@ -23,4 +15,4 @@ def handler(message):
             db.session.add(entity)
             db.session.commit()
     except Exception as e:
-        print(e)
+        bot.flask_logger.error(f'handle message failed: {e}')
