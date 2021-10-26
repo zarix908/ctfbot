@@ -10,8 +10,8 @@ class UserEntity(db.Model):
     tg_first_name = db.Column(db.String)
     tg_last_name = db.Column(db.String)
     first_name = db.Column(db.String)
-    last_name: db.Column(db.String)
-    course: db.Column(db.Integer)
+    last_name = db.Column(db.String)
+    course = db.Column(db.Integer)
     state = db.Column(db.Enum(models.user.UserState))
 
     def __repr__(self):

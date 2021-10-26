@@ -9,5 +9,7 @@ def init(app):
     db_name = 'ctfbot'
 
     app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{user}:{password}@localhost:5432/{db_name}'
-    db = SQLAlchemy(app)
-    db.create_all()
+    global db
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
