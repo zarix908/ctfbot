@@ -1,25 +1,31 @@
+import gettext
 import time
 
 from app import app
 from bot import bot
-import const
 import db
-from notprovide import config
+from config import config
 
 
 def run():
-    with open(const.WEBHOOK_SSL_CERT, 'r') as file:
+    with open(config.webhook_tls_cert_path, 'r') as cert:
         bot.remove_webhook()
         print('removing webhook...')
-        time.sleep(10)
-        bot.set_webhook(config.HOST_URL + const.WEBHOOK_UPDATE_URL, certificate=file)
+        time.sleep(10)  # wait until webhook be removed
+        bot.set_webhook(config.HOST_URL + config.webhook_update_url, certificate=cert)
         app.run(
             '0.0.0.0', config.HOST_PORT,
-            ssl_context=(const.WEBHOOK_SSL_CERT, const.WEBHOOK_SSL_PRIV)
+            ssl_context=(config.webhook_tls_cert_path, config.webhook_tls_privkey_path)
         )
 
 
 def main():
+    gettext.translation(
+        domain='messages',
+        localedir='locales',
+        languages=['ru_RU']
+    ).install()
+
     db.init(app)
     app.run('127.0.0.1', 8080)
 
