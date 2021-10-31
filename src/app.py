@@ -3,13 +3,13 @@ from flask import request, Flask
 from werkzeug.exceptions import abort
 
 from bot import bot
-from const import WEBHOOK_UPDATE_URL
+from config import config
 
 app = Flask(__name__)
 bot.setup(app.app_context, app.logger)
 
 
-@app.route(WEBHOOK_UPDATE_URL, methods=['POST'])
+@app.route(config.webhook_update_url, methods=['POST'])
 def update():
     if request.headers.get('content-type') != 'application/json':
         abort(403)

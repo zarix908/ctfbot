@@ -1,8 +1,9 @@
 import configparser
-import pydantic
+from pydantic.dataclasses import dataclass
 
 
-class Config(pydantic.BaseModel):
+@dataclass
+class Config:
     # host
     host_addr: str
     host_port: int

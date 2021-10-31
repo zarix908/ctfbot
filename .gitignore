@@ -1,4 +1,9 @@
 .idea/
 __pycache__/
 venv/
+
+# confidential files for develop
 notprovide/
+
+# pybabel compile output (binary gettext format)
+**.mo
