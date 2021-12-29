@@ -3,6 +3,6 @@ class DictMixin:
         res = {}
 
         for column in self.__table__.columns:
-            res[column.name] = self.__dict__[column.name]
+            res[column.name] = getattr(self, column.name)
 
         return res

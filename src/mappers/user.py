@@ -19,3 +19,9 @@ def from_json(obj):
         user.state = UserState.READ_FIRST_NAME
 
     return user
+
+
+def update_entity(entity, user):
+    for name, value in user.dict().items():
+        if getattr(entity, name) != value:
+            setattr(entity, name, value)

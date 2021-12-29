@@ -9,6 +9,7 @@ class UserState(Enum):
     READ_FIRST_NAME = 1
     READ_LAST_NAME = 2
     READ_COURSE = 3
+    COMPLETE = 4
 
 
 CYRILLIC_NAME = constr(regex=r'[А-Я][А-Яа-я\s]*')
