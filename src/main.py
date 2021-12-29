@@ -12,9 +12,10 @@ def run():
         bot.remove_webhook()
         print('removing webhook...')
         time.sleep(10)  # wait until webhook be removed
-        bot.set_webhook(config.HOST_URL + config.webhook_update_url, certificate=cert)
+        webhook_url = f'https://{config.host_addr}:{config.host_port}{config.webhook_update_url}'
+        bot.set_webhook(webhook_url, certificate=cert)
         app.run(
-            '0.0.0.0', config.HOST_PORT,
+            '0.0.0.0', config.host_port,
             ssl_context=(config.webhook_tls_cert_path, config.webhook_tls_privkey_path)
         )
 
@@ -28,6 +29,7 @@ def main():
 
     db.init(app)
     app.run('127.0.0.1', 8080)
+    # run()
 
 
 if __name__ == '__main__':

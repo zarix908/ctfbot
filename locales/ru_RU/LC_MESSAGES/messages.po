@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-31 15:55+0500\n"
-"PO-Revision-Date: 2021-10-31 15:55+0500\n"
+"POT-Creation-Date: 2021-12-28 23:02+0500\n"
+"PO-Revision-Date: 2021-12-28 23:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru_RU\n"
 "Language-Team: ru_RU <LL@li.org>\n"
@@ -21,13 +21,23 @@ msgstr ""
 
 #: src/bot.py:22
 msgid "reg.hello"
-msgstr "Привет! Это бот курса 'Основы компьютерной безопасности'. Сначала необходимо зарегистрироваться на курс. Для выставления зачета, нам нужно знать ФИО, курс и username в телеграмме."
+msgstr ""
+"Привет! Это бот курса 'Основы компьютерной безопасности'. Сначала "
+"необходимо зарегистрироваться на курс. Для выставления зачета, нам нужно "
+"знать ФИО, курс и username в телеграмме."
 
 #: src/bot.py:23
 msgid "reg.setup_username"
-msgstr "У тебя не выставлен username в телеграмме. Чтобы его выставить, нужно перейти в меню телеграм -> Settings -> Edit profile -> Username и установить username."
+msgstr ""
+"У тебя не выставлен username в телеграмме. Чтобы его выставить, нужно "
+"перейти в меню телеграм -> Settings -> Edit profile -> Username и "
+"установить username."
 
 #: src/bot.py:24
 msgid "reg.ask_first_name"
 msgstr "Как тебя зовут?"
+
+#: src/bot.py:37
+msgid "reg.ask_last_name"
+msgstr "Напиши фамилию"
 

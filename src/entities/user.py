@@ -1,8 +1,9 @@
 import models
 from db import db
+from .dict_mixin import DictMixin
 
 
-class UserEntity(db.Model):
+class UserEntity(db.Model, DictMixin):
     __tablename__ = 'users'
 
     tg_id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +14,9 @@ class UserEntity(db.Model):
     last_name = db.Column(db.String)
     course = db.Column(db.Integer)
     state = db.Column(db.Enum(models.user.UserState))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def __repr__(self):
         return f'tg_id {self.tg_id}' \

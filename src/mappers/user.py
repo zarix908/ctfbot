@@ -1,6 +1,5 @@
 from functools import partial
 
-from entities.user import UserEntity
 from mappers.utils import deep_get
 from models.user import User, UserState
 
@@ -20,16 +19,3 @@ def from_json(obj):
         user.state = UserState.READ_FIRST_NAME
 
     return user
-
-
-def to_entity(user):
-    return UserEntity(
-        tg_id=user.tg_id,
-        tg_username=user.tg_username,
-        tg_first_name=user.tg_first_name,
-        tg_last_name=user.tg_last_name,
-        first_name=user.first_name,
-        last_name=user.last_name,
-        course=user.course,
-        state=user.state
-    )

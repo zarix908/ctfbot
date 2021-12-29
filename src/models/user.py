@@ -1,8 +1,7 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import Field, constr
-from pydantic.dataclasses import dataclass
+from pydantic import Field, constr, BaseModel
 
 
 class UserState(Enum):
@@ -15,8 +14,7 @@ class UserState(Enum):
 CYRILLIC_NAME = constr(regex=r'[А-Я][А-Яа-я\s]*')
 
 
-@dataclass
-class User:
+class User(BaseModel):
     tg_id: int
     tg_username: Optional[str] = Field(None)
     tg_first_name: Optional[str] = Field(None)
