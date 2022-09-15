@@ -27,6 +27,7 @@ class User(BaseModel):
     last_name: Optional[CYRILLIC_NAME] = Field(None)
     course: Optional[int] = Field(None, ge=1, le=4)
     state: UserState = Field(UserState.SETUP_USERNAME)
+    is_admin: bool
 
     def __repr__(self):
         return f'tg_id {self.tg_id}' \

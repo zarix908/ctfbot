@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-16 01:41+0500\n"
+"POT-Creation-Date: 2022-09-16 04:05+0500\n"
 "PO-Revision-Date: 2021-12-28 23:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru_RU\n"
@@ -19,45 +19,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: src/bot.py:21
+#: src/bot.py:24
 msgid "errors.global_exception"
 msgstr "Возникла ошибка. Обратись к администратору и перешли ему это сообщение."
 
-#: src/bot.py:21
+#: src/bot.py:24
 msgid "common.admin_username"
 msgstr "Никнейм администратора в телеграм:"
 
-#: src/bot.py:21
+#: src/bot.py:25
 msgid "errors.error_id"
 msgstr "Идентификатор ошибки:"
 
-#: src/handlers.py:17
+#: src/handlers.py:18
+msgid "admin.activated"
+msgstr "Режим администратора активирован."
+
+#: src/handlers.py:26
+msgid "admin.command_success"
+msgstr "Команда выполнена."
+
+#: src/handlers.py:28
+msgid "admin.command_not_found"
+msgstr "Команда не найдена."
+
+#: src/handlers.py:42
 msgid "reg.hello"
 msgstr ""
 "Привет! Это бот курса 'Основы компьютерной безопасности'. Сначала "
 "необходимо зарегистрироваться на курс. Для выставления зачета, нам нужно "
 "знать ФИО, курс и username в телеграмме."
 
-#: src/handlers.py:18
+#: src/handlers.py:43
 msgid "reg.setup_username"
 msgstr ""
 "У тебя не выставлен username в телеграмме. Чтобы его выставить, нужно "
 "перейти в меню телеграм -> Settings -> Edit profile -> Username и "
 "установить username."
 
-#: src/handlers.py:19
+#: src/handlers.py:44
 msgid "reg.ask_first_name"
 msgstr "Как тебя зовут?"
 
-#: src/handlers.py:35
+#: src/handlers.py:61
 msgid "reg.ask_last_name"
 msgstr "Напиши фамилию"
 
-#: src/handlers.py:39
+#: src/handlers.py:65
 msgid "reg.ask_course"
 msgstr "На каком курсе учишься?"
 
-#: src/handlers.py:43
+#: src/handlers.py:69
 msgid "reg.complete"
 msgstr "Регистрация успешно завершена."
 

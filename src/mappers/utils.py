@@ -5,11 +5,7 @@ def deep_get(obj, key):
     for k in path:
         if current is None:
             return None
-
-        try:
-            current = array_or_dict_get(current, k)
-        except (KeyError, ValueError):
-            return None
+        current = array_or_dict_get(current, k)
 
     return current
 
@@ -17,5 +13,5 @@ def deep_get(obj, key):
 def array_or_dict_get(obj, key):
     try:
         return obj[int(key)]
-    except ValueError:
-        return obj[key]
+    except (ValueError, IndexError):
+        return obj.get(key)

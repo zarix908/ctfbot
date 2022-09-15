@@ -1,13 +1,38 @@
+from uuid import uuid4
+
 import mappers
 from db import db
+from entities.token import TokenEntity
 from entities.user import UserEntity
 from models.user import UserState, User
 
 
-def handle_registration(bot, message):
+def handle_admin_command(bot, user, message):
     global _
 
-    user = mappers.user.from_json(message.json)
+    if not user.is_admin:
+        return False
+
+    text = message.json['text'].strip()
+    if text == '/start':
+        bot.send_message(message.json['chat']['id'], _('admin.activated'))
+    elif text.startswith('/generate'):
+        number = int(text.split()[1])
+        with bot.db_context():
+            db.session.add_all(
+                TokenEntity(token=str(uuid4()), free=True) for _ in range(number)
+            )
+            db.session.commit()
+        bot.send_message(message.json['chat']['id'], _('admin.command_success'))
+    else:
+        bot.send_message(message.json['chat']['id'], _('admin.command_not_found'))
+
+    return True
+
+
+def handle_registration(bot, user, message):
+    global _
+
     response_msg = None
 
     with bot.db_context():
@@ -30,16 +55,17 @@ def handle_registration(bot, message):
             return
 
         user = User(**entity.dict())
+        text = message.json['text'].strip()
         if entity.state == UserState.READ_FIRST_NAME:
-            user.first_name = message.json['text']
+            user.first_name = text
             response_msg = _('reg.ask_last_name')
             user.state = UserState.READ_LAST_NAME
         if entity.state == UserState.READ_LAST_NAME:
-            user.last_name = message.json['text']
+            user.last_name = text
             response_msg = _('reg.ask_course')
             user.state = UserState.READ_COURSE
         if entity.state == UserState.READ_COURSE:
-            user.course = int(message.json['text'])
+            user.course = int(text)
             response_msg = _('reg.complete')
             user.state = UserState.COMPLETE
 
