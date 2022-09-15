@@ -1,4 +1,6 @@
+import contextlib
 import traceback
+from uuid import uuid4
 
 from config import config
 from handlers import handle_registration
@@ -11,6 +13,14 @@ bot = TgBot(config.tg_bot_token)
 def handler(message):
     global _
     try:
-        handle_registration(message, bot.db_context)
+        handle_registration(bot, message)
     except Exception as e:
-        bot.flask_logger.error(f'handle message failed: {e} {traceback.format_exc()}')
+        with contextlib.suppress(Exception):
+            error_id = uuid4()
+
+        error_msg = _("errors.global_exception") + _("common.admin_username") + config.admin_username + _(
+            "errors.error_id") + error_id
+        with contextlib.suppress(Exception):
+            bot.send_message(message.json['chat']['id'], error_msg)
+
+        bot.flask_logger.error(f'handle message failed: {e} {traceback.format_exc()}, id: {error_id}')

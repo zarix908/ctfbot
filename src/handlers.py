@@ -4,13 +4,13 @@ from entities.user import UserEntity
 from models.user import UserState, User
 
 
-def handle_registration(message, db_context):
+def handle_registration(bot, message):
     global _
 
     user = mappers.user.from_json(message.json)
     response_msg = None
 
-    with db_context():
+    with bot.db_context():
         entity = UserEntity.query.filter_by(tg_id=user.tg_id).first()
 
         if entity is None:
@@ -26,7 +26,7 @@ def handle_registration(message, db_context):
             entity = UserEntity(**dict(user))
             db.session.add(entity)
             db.session.commit()
-            print(response_msg)
+            bot.send_message(message.json['chat']['id'], response_msg)
             return
 
         user = User(**entity.dict())
@@ -46,4 +46,4 @@ def handle_registration(message, db_context):
         mappers.user.update_entity(entity, user)
         db.session.commit()
 
-    print(response_msg)
+    bot.send_message(message.json['chat']['id'], response_msg)

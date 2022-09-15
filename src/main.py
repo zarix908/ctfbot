@@ -1,4 +1,5 @@
 import gettext
+import os
 import time
 
 from app import app
@@ -7,7 +8,7 @@ import db
 from config import config
 
 
-def run():
+def run_with_webhook():
     with open(config.webhook_tls_cert_path, 'r') as cert:
         bot.remove_webhook()
         print('removing webhook...')
@@ -28,8 +29,11 @@ def main():
     ).install()
 
     db.init(app)
-    app.run('127.0.0.1', 9090)
-    # run()
+
+    if os.getenv('TEST') == '1':
+        app.run('127.0.0.1', 9090)
+    else:
+        run_with_webhook()
 
 
 if __name__ == '__main__':

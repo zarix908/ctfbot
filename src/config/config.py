@@ -23,6 +23,9 @@ class Config:
     # tg bot
     tg_bot_token: str
 
+    # info
+    admin_username: str
+
 
 def load(filename):
     config = configparser.ConfigParser()
@@ -37,5 +40,6 @@ def load(filename):
         webhook_update_url=config['webhook']['UpdateURL'],
         webhook_tls_cert_path=config['webhook']['TLSCertPath'],
         webhook_tls_privkey_path=config['webhook']['TLSPrivateKeyPath'],
-        tg_bot_token=config['secrets']['BotToken']
+        tg_bot_token=config['secrets']['BotToken'],
+        admin_username=config['info']['AdminUsername']
     )

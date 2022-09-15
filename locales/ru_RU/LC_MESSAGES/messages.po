@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-12-29 14:52+0500\n"
+"POT-Creation-Date: 2022-09-16 01:41+0500\n"
 "PO-Revision-Date: 2021-12-28 23:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru_RU\n"
@@ -18,6 +18,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
+
+#: src/bot.py:21
+msgid "errors.global_exception"
+msgstr "Возникла ошибка. Обратись к администратору и перешли ему это сообщение."
+
+#: src/bot.py:21
+msgid "common.admin_username"
+msgstr "Никнейм администратора в телеграм: "
+
+#: src/bot.py:21
+msgid "errors.error_id"
+msgstr "Идентификатор ошибки: "
 
 #: src/handlers.py:17
 msgid "reg.hello"
