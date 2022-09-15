@@ -18,8 +18,8 @@ def handler(message):
         with contextlib.suppress(Exception):
             error_id = uuid4()
 
-        error_msg = _("errors.global_exception") + _("common.admin_username") + config.admin_username + _(
-            "errors.error_id") + error_id
+        error_msg = f'{_("errors.global_exception")} {_("common.admin_username")}' \
+                    f' {config.admin_username}. {_("errors.error_id")} {error_id}.'
         with contextlib.suppress(Exception):
             bot.send_message(message.json['chat']['id'], error_msg)
 

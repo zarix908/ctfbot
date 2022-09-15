@@ -16,6 +16,9 @@ CYRILLIC_NAME = constr(regex=r'[А-Я][А-Яа-я\s]*')
 
 
 class User(BaseModel):
+    class Config:
+        validate_assignment = True
+
     tg_id: int
     tg_username: Optional[str] = Field(None)
     tg_first_name: Optional[str] = Field(None)
