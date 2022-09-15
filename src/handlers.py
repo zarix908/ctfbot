@@ -10,7 +10,7 @@ from models.user import UserState, User
 def handle_admin_command(bot, user, message):
     global _
 
-    if not user.is_admin:
+    if not user.is_admin():
         return False
 
     text = message.json['text'].strip()

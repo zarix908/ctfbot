@@ -19,11 +19,12 @@ def handler(message):
             handle_registration(bot, user, message)
     except Exception as e:
         with contextlib.suppress(Exception):
-            error_id = uuid4()
+            error_id = str(uuid4())
 
-        error_msg = _("errors.global_exception") + ' ' + _(
-            "common.admin_username") + ' ' + config.admin_username + '. ' + _("errors.error_id") + ' ' + str(
-            error_id) + '.'
+        except_msg = _("errors.global_exception")
+        username_msg = _("common.admin_username")
+        err_id_msg = _("errors.error_id")
+        error_msg = f'{except_msg} {username_msg} {config.admin_username}. {err_id_msg} {error_id}.'
         with contextlib.suppress(Exception):
             bot.send_message(message.json['chat']['id'], error_msg)
 

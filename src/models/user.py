@@ -3,6 +3,8 @@ from typing import Optional
 
 from pydantic import Field, constr, BaseModel
 
+from config import config
+
 
 class UserState(Enum):
     SETUP_USERNAME = 0
@@ -27,7 +29,6 @@ class User(BaseModel):
     last_name: Optional[CYRILLIC_NAME] = Field(None)
     course: Optional[int] = Field(None, ge=1, le=4)
     state: UserState = Field(UserState.SETUP_USERNAME)
-    is_admin: bool
 
     def __repr__(self):
         return f'tg_id {self.tg_id}' \
@@ -38,3 +39,6 @@ class User(BaseModel):
                f'ln: {self.last_name}' \
                f'course: {self.course}' \
                f'state: {self.state}'
+
+    def is_admin(self):
+        return self.tg_username == config.admin_username

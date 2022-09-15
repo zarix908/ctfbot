@@ -11,15 +11,13 @@ def from_json(obj):
     get = partial(deep_get, obj)
 
     # install pydantic plugin to prevent linter warnings
-    user = User(tg_id=get('from.id'), is_admin=False)
+    user = User(tg_id=get('from.id'))
     user.tg_username = get('from.username')
     user.tg_first_name = get('from.first_name')
     user.tg_last_name = get('from.last_name')
 
     if user.tg_username:
         user.state = UserState.READ_FIRST_NAME
-        if user.tg_username == config.admin_username:
-            user.is_admin = True
 
     return user
 
