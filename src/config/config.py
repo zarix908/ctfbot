@@ -13,6 +13,7 @@ class Config:
     # db
     db_name: str
     db_user: str
+    db_host: str
     db_password: str
 
     # webhook
@@ -36,6 +37,7 @@ def load(filename):
         host_port=int(config['host']['Port'], 10),
         db_name=config['db']['Name'],
         db_user=config['db']['User'],
+        db_host=config['db']['Host'],
         db_password=config['secrets']['DbPassword'],
         webhook_update_url=config['webhook']['UpdateURL'],
         webhook_tls_cert_path=config['webhook']['TLSCertPath'],

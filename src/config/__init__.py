@@ -1,3 +1,6 @@
+import os
+
 from .config import load
 
-config = load('./notprovide/devconfig.ini')
+filename = './notprovide/devconfig.ini' if os.getenv('TEST') == '1' else './notprovide/prodconfig.ini'
+config = load(filename)
