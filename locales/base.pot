@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-16 04:05+0500\n"
+"POT-Creation-Date: 2022-09-16 08:48+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,47 +21,51 @@ msgstr ""
 msgid "errors.global_exception"
 msgstr ""
 
-#: src/bot.py:24
+#: src/bot.py:25
 msgid "common.admin_username"
 msgstr ""
 
-#: src/bot.py:25
+#: src/bot.py:26
 msgid "errors.error_id"
 msgstr ""
 
-#: src/handlers.py:18
+#: src/handlers.py:19
 msgid "admin.activated"
 msgstr ""
 
-#: src/handlers.py:26
+#: src/handlers.py:27
 msgid "admin.command_success"
 msgstr ""
 
-#: src/handlers.py:28
+#: src/handlers.py:29
 msgid "admin.command_not_found"
 msgstr ""
 
-#: src/handlers.py:42
+#: src/handlers.py:52
 msgid "reg.hello"
 msgstr ""
 
-#: src/handlers.py:43
+#: src/handlers.py:62 src/handlers.py:68 src/handlers.py:71
+msgid "reg.incorrect_token"
+msgstr ""
+
+#: src/handlers.py:80
 msgid "reg.setup_username"
 msgstr ""
 
-#: src/handlers.py:44
+#: src/handlers.py:80 src/handlers.py:87
 msgid "reg.ask_first_name"
 msgstr ""
 
-#: src/handlers.py:61
+#: src/handlers.py:88
 msgid "reg.ask_last_name"
 msgstr ""
 
-#: src/handlers.py:65
+#: src/handlers.py:89
 msgid "reg.ask_course"
 msgstr ""
 
-#: src/handlers.py:69
+#: src/handlers.py:90
 msgid "reg.complete"
 msgstr ""
 

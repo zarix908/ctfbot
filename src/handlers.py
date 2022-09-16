@@ -1,3 +1,4 @@
+import uuid
 from uuid import uuid4
 
 import mappers
@@ -30,46 +31,69 @@ def handle_admin_command(bot, user, message):
     return True
 
 
+class RegistrationStep:
+    def __init__(self, user_attribute, response_msg):
+        self.__user_attribute = user_attribute
+        self.__response_msg = response_msg
+
+    def input(self, user, value):
+        if self.__user_attribute:
+            setattr(user, self.__user_attribute, value)
+        return self.__response_msg
+
+
 def handle_registration(bot, user, message):
     global _
 
-    response_msg = None
+    chat_id = message.json['chat']['id']
+    text = message.json['text'].strip()
+
+    if text == '/start':
+        bot.send_message(message.json['chat']['id'], _('reg.hello'))
+        return
 
     with bot.db_context():
-        entity = UserEntity.query.filter_by(tg_id=user.tg_id).first()
+        user_entity = UserEntity.query.get(user.tg_id)
 
-        if entity is None:
-            hello_msg = _('reg.hello')
-            setup_username_msg = _('reg.setup_username')
-            ask_first_name_msg = _('reg.ask_first_name')
+        if not user_entity:
+            try:
+                token = str(uuid.UUID(text))
+            except ValueError:
+                bot.send_message(chat_id, _('reg.incorrect_token'))
+                return
 
-            if user.state == UserState.SETUP_USERNAME:
-                response_msg = f'{hello_msg}\n\n{setup_username_msg}'
-            else:
-                response_msg = f'{hello_msg}\n\n{ask_first_name_msg}'
+            token_entity = TokenEntity.query.get(token)
 
-            entity = UserEntity(**dict(user))
-            db.session.add(entity)
+            if not token:
+                bot.send_message(chat_id, _('reg.incorrect_token'))
+
+            if not token_entity.free:
+                bot.send_message(chat_id, _('reg.incorrect_token'))
+                return
+
+            token_entity.free = False
+            user_entity = UserEntity(**dict(user))
+            user_entity.token = token
+            db.session.add(user_entity)
             db.session.commit()
-            bot.send_message(message.json['chat']['id'], response_msg)
+
+            response_msg = _('reg.setup_username') if user.state == UserState.SETUP_USERNAME else _(
+                'reg.ask_first_name')
+            bot.send_message(chat_id, response_msg)
             return
 
-        user = User(**entity.dict())
-        text = message.json['text'].strip()
-        if entity.state == UserState.READ_FIRST_NAME:
-            user.first_name = text
-            response_msg = _('reg.ask_last_name')
-            user.state = UserState.READ_LAST_NAME
-        if entity.state == UserState.READ_LAST_NAME:
-            user.last_name = text
-            response_msg = _('reg.ask_course')
-            user.state = UserState.READ_COURSE
-        if entity.state == UserState.READ_COURSE:
-            user.course = int(text)
-            response_msg = _('reg.complete')
-            user.state = UserState.COMPLETE
+        user = User(**user_entity.dict())
+        steps = [
+            RegistrationStep(None, _('reg.ask_first_name')),
+            RegistrationStep('first_name', _('reg.ask_last_name')),
+            RegistrationStep('last_name', _('reg.ask_course')),
+            RegistrationStep('course', _('reg.complete'))
+        ]
+        response_msg = steps[user_entity.state.value]. \
+            input(user, int(text) if user_entity.state == UserState.READ_COURSE else text)
+        user.state = UserState(user.state.value + 1)
 
-        mappers.user.update_entity(entity, user)
+        mappers.user.update_entity(user_entity, user)
         db.session.commit()
 
-    bot.send_message(message.json['chat']['id'], response_msg)
+    bot.send_message(chat_id, response_msg)

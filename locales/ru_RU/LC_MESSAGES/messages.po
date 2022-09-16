@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-16 04:05+0500\n"
+"POT-Creation-Date: 2022-09-16 08:48+0500\n"
 "PO-Revision-Date: 2021-12-28 23:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru_RU\n"
@@ -23,53 +23,59 @@ msgstr ""
 msgid "errors.global_exception"
 msgstr "Возникла ошибка. Обратись к администратору и перешли ему это сообщение."
 
-#: src/bot.py:24
+#: src/bot.py:25
 msgid "common.admin_username"
 msgstr "Никнейм администратора в телеграм:"
 
-#: src/bot.py:25
+#: src/bot.py:26
 msgid "errors.error_id"
 msgstr "Идентификатор ошибки:"
 
-#: src/handlers.py:18
+#: src/handlers.py:19
 msgid "admin.activated"
 msgstr "Режим администратора активирован."
 
-#: src/handlers.py:26
+#: src/handlers.py:27
 msgid "admin.command_success"
 msgstr "Команда выполнена."
 
-#: src/handlers.py:28
+#: src/handlers.py:29
 msgid "admin.command_not_found"
 msgstr "Команда не найдена."
 
-#: src/handlers.py:42
+#: src/handlers.py:52
 msgid "reg.hello"
 msgstr ""
 "Привет! Это бот курса 'Основы компьютерной безопасности'. Сначала "
 "необходимо зарегистрироваться на курс. Для выставления зачета, нам нужно "
 "знать ФИО, курс и username в телеграмме."
 
-#: src/handlers.py:43
+#: src/handlers.py:62 src/handlers.py:68 src/handlers.py:71
+msgid "reg.incorrect_token"
+msgstr ""
+"Доступ запрещен. Введен некорректный токен. Чтобы попасть на курс, нужно "
+"ввести токен, полученный от администраторов"
+
+#: src/handlers.py:80
 msgid "reg.setup_username"
 msgstr ""
 "У тебя не выставлен username в телеграмме. Чтобы его выставить, нужно "
 "перейти в меню телеграм -> Settings -> Edit profile -> Username и "
-"установить username."
+"установить username. После чего отправить боту сообщение 'Установлен'."
 
-#: src/handlers.py:44
+#: src/handlers.py:80 src/handlers.py:87
 msgid "reg.ask_first_name"
 msgstr "Как тебя зовут?"
 
-#: src/handlers.py:61
+#: src/handlers.py:88
 msgid "reg.ask_last_name"
 msgstr "Напиши фамилию"
 
-#: src/handlers.py:65
+#: src/handlers.py:89
 msgid "reg.ask_course"
 msgstr "На каком курсе учишься?"
 
-#: src/handlers.py:69
+#: src/handlers.py:90
 msgid "reg.complete"
 msgstr "Регистрация успешно завершена."
 
