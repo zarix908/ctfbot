@@ -1,7 +1,11 @@
+import json
 import uuid
 from uuid import uuid4
 
+from pydantic import ValidationError
+
 import mappers
+from config import config
 from db import db
 from entities.token import TokenEntity
 from entities.user import UserEntity
@@ -12,11 +16,13 @@ def handle_admin_command(bot, user, message):
     global _
 
     if not user.is_admin():
-        return False
+        return
 
+    chat_id = message.json['chat']['id']
     text = message.json['text'].strip()
+
     if text == '/start':
-        bot.send_message(message.json['chat']['id'], _('admin.activated'))
+        bot.send_message(chat_id, _('admin.activated'))
     elif text.startswith('/generate'):
         number = int(text.split()[1])
         with bot.db_context():
@@ -24,11 +30,9 @@ def handle_admin_command(bot, user, message):
                 TokenEntity(token=str(uuid4()), free=True) for _ in range(number)
             )
             db.session.commit()
-        bot.send_message(message.json['chat']['id'], _('admin.command_success'))
+        bot.send_message(chat_id, _('admin.command_success'))
     else:
-        bot.send_message(message.json['chat']['id'], _('admin.command_not_found'))
-
-    return True
+        bot.send_message(chat_id, _('admin.command_not_found'))
 
 
 class RegistrationStep:
@@ -42,6 +46,27 @@ class RegistrationStep:
         return self.__response_msg
 
 
+def with_handling_pydantic_errors(f):
+    def decorator(bot, user, message):
+        try:
+            f(bot, user, message)
+        except ValidationError as e:
+            error_field = json.loads(e.json())[0]['loc'][0]
+            msg_by_field = {
+                'first_name': _('validation.user.incorrect_first_name'),
+                'last_name': _('validation.user.incorrect_last_name'),
+                'course': _('validation.user.incorrect_course')
+            }
+
+            help_msg = _('common.help_msg')
+            username_msg = _('common.admin_username')
+            msg = f'{msg_by_field[error_field]} {help_msg} {username_msg} @{config.admin_username}.'
+            bot.send_message(message.json['chat']['id'], msg)
+
+    return decorator
+
+
+@with_handling_pydantic_errors
 def handle_registration(bot, user, message):
     global _
 
@@ -66,6 +91,7 @@ def handle_registration(bot, user, message):
 
             if not token_entity:
                 bot.send_message(chat_id, _('reg.incorrect_token'))
+                return
 
             if not token_entity.free:
                 bot.send_message(chat_id, _('reg.incorrect_token'))

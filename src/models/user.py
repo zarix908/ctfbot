@@ -14,7 +14,7 @@ class UserState(Enum):
     COMPLETE = 4
 
 
-CYRILLIC_NAME = constr(regex=r'[А-Я][А-Яа-я\s]*')
+CYRILLIC_NAME = constr(regex=r'[А-Я]([А-Я]([А-Яа-я])*[- ]?)*')
 
 
 class User(BaseModel):
@@ -27,7 +27,7 @@ class User(BaseModel):
     tg_last_name: Optional[str] = Field(None)
     first_name: Optional[CYRILLIC_NAME] = Field(None)
     last_name: Optional[CYRILLIC_NAME] = Field(None)
-    course: Optional[int] = Field(None, ge=1, le=4)
+    course: Optional[int] = Field(None, ge=1, le=5)
     state: UserState = Field(UserState.SETUP_USERNAME)
 
     def __repr__(self):
