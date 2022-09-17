@@ -3,13 +3,14 @@ import uuid
 from uuid import uuid4
 
 from pydantic import ValidationError
+from pydantic.dataclasses import dataclass
 
 import mappers
 from config import config
 from db import db
 from entities.token import TokenEntity
 from entities.user import UserEntity
-from models.user import UserState, User
+from models.user import UserRegistrationState, User
 
 
 def handle_admin_command(bot, user, message):
@@ -35,15 +36,10 @@ def handle_admin_command(bot, user, message):
         bot.send_message(chat_id, _('admin.command_not_found'))
 
 
+@dataclass
 class RegistrationStep:
-    def __init__(self, user_attribute, response_msg):
-        self.__user_attribute = user_attribute
-        self.__response_msg = response_msg
-
-    def input(self, user, value):
-        if self.__user_attribute:
-            setattr(user, self.__user_attribute, value)
-        return self.__response_msg
+    user_attribute: str
+    response_msg: str
 
 
 def with_handling_pydantic_errors(f):
@@ -74,7 +70,7 @@ def handle_registration(bot, user, message):
     text = message.json['text'].strip()
 
     if text == '/start':
-        bot.send_message(message.json['chat']['id'], _('reg.hello'))
+        bot.send_message(chat_id, _('reg.hello'))
         return
 
     with bot.db_context():
@@ -84,15 +80,33 @@ def handle_registration(bot, user, message):
             handle_token_input(bot, user, chat_id, text)
             return
 
+        # check on each registration step to prevent reset username during registration
+        if not user.tg_username or user.tg_username.strip() == '':
+            bot.send_message(chat_id, _('reg.setup_username'))
+            return
+
+        if user_entity.registration_state == UserRegistrationState.SETUP_USERNAME:
+            user.registration_state = UserRegistrationState.ASK_FIRST_NAME
+            mappers.user.update_entity(user_entity, user)
+            db.session.commit()
+            bot.send_message(chat_id, _('reg.ask_first_name'))
+            return
+
+        if user_entity.registration_state == UserRegistrationState.COMPLETE:
+            bot.send_message(chat_id, _('reg.already_registered'))
+            return
+
         user = User(**user_entity.dict())
         steps = [
-            RegistrationStep(None, _('reg.ask_first_name')),
             RegistrationStep('first_name', _('reg.ask_last_name')),
             RegistrationStep('last_name', _('reg.ask_course')),
             RegistrationStep('course', _('reg.complete'))
         ]
+        # -1 offset because step count less than count of registration states
+        reg_step = steps[user_entity.registration_state.value - 1]
+
         value = text
-        if user_entity.state == UserState.READ_COURSE:
+        if user_entity.registration_state == UserRegistrationState.ASK_COURSE:
             try:
                 value = int(text, 10)
             except ValueError:
@@ -103,14 +117,13 @@ def handle_registration(bot, user, message):
                 bot.send_message(chat_id, msg)
                 return
 
-        response_msg = steps[user_entity.state.value]. \
-            input(user, value if user_entity.state == UserState.READ_COURSE else text)
-        user.state = UserState(user.state.value + 1)
+        setattr(user, reg_step.user_attribute, value)
+        user.registration_state = UserRegistrationState(user.registration_state.value + 1)
 
         mappers.user.update_entity(user_entity, user)
         db.session.commit()
 
-    bot.send_message(chat_id, response_msg)
+    bot.send_message(chat_id, reg_step.response_msg)
 
 
 def handle_token_input(bot, user, chat_id, text):
@@ -131,6 +144,6 @@ def handle_token_input(bot, user, chat_id, text):
     db.session.add(user_entity)
     db.session.commit()
 
-    response_msg = _('reg.setup_username') if user.state == UserState.SETUP_USERNAME else _(
+    response_msg = _('reg.setup_username') if user.registration_state == UserRegistrationState.SETUP_USERNAME else _(
         'reg.ask_first_name')
     bot.send_message(chat_id, response_msg)

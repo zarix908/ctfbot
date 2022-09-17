@@ -13,7 +13,7 @@ class UserEntity(db.Model, DictMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     course = db.Column(db.Integer)
-    state = db.Column(db.Enum(models.user.UserState))
+    registration_state = db.Column(db.Enum(models.user.UserRegistrationState))
     token = db.Column(db.String(36))
 
     def __init__(self, *args, **kwargs):
@@ -27,5 +27,5 @@ class UserEntity(db.Model, DictMixin):
                f'fn: {self.first_name}' \
                f'ln: {self.last_name}' \
                f'course: {self.course}' \
-               f'state: {self.state}' \
+               f'reg_state: {self.registration_state}' \
                f'token: {self.token}'

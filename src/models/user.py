@@ -6,11 +6,11 @@ from pydantic import Field, constr, BaseModel
 from config import config
 
 
-class UserState(Enum):
+class UserRegistrationState(Enum):
     SETUP_USERNAME = 0
-    READ_FIRST_NAME = 1
-    READ_LAST_NAME = 2
-    READ_COURSE = 3
+    ASK_FIRST_NAME = 1
+    ASK_LAST_NAME = 2
+    ASK_COURSE = 3
     COMPLETE = 4
 
 
@@ -28,7 +28,7 @@ class User(BaseModel):
     first_name: Optional[CYRILLIC_NAME] = Field(None)
     last_name: Optional[CYRILLIC_NAME] = Field(None)
     course: Optional[int] = Field(None, ge=1, le=5)
-    state: UserState = Field(UserState.SETUP_USERNAME)
+    registration_state: UserRegistrationState = Field(UserRegistrationState.SETUP_USERNAME)
 
     def __repr__(self):
         return f'tg_id {self.tg_id}' \
@@ -38,7 +38,7 @@ class User(BaseModel):
                f'fn: {self.first_name}' \
                f'ln: {self.last_name}' \
                f'course: {self.course}' \
-               f'state: {self.state}'
+               f'reg_state: {self.registration_state}'
 
     def is_admin(self):
         return self.tg_username == config.admin_username

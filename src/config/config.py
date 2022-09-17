@@ -1,5 +1,4 @@
 import configparser
-import os
 
 from pydantic.dataclasses import dataclass
 

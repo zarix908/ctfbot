@@ -1,8 +1,6 @@
 from functools import partial
-
-from config import config
 from mappers.utils import deep_get
-from models.user import User, UserState
+from models.user import User, UserRegistrationState
 
 
 def from_json(obj):
@@ -17,7 +15,7 @@ def from_json(obj):
     user.tg_last_name = get('from.last_name')
 
     if user.tg_username:
-        user.state = UserState.READ_FIRST_NAME
+        user.registration_state = UserRegistrationState.ASK_FIRST_NAME
 
     return user
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-17 16:39+0500\n"
+"POT-Creation-Date: 2022-09-17 18:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "errors.global_exception"
 msgstr ""
 
-#: src/bot.py:28 src/handlers.py:62
+#: src/bot.py:28 src/handlers.py:58 src/handlers.py:114
 msgid "common.admin_username"
 msgstr ""
 
@@ -29,59 +29,63 @@ msgstr ""
 msgid "errors.error_id"
 msgstr ""
 
-#: src/handlers.py:25
+#: src/handlers.py:26
 msgid "admin.activated"
 msgstr ""
 
-#: src/handlers.py:33
+#: src/handlers.py:34
 msgid "admin.command_success"
 msgstr ""
 
-#: src/handlers.py:35
+#: src/handlers.py:36
 msgid "admin.command_not_found"
 msgstr ""
 
-#: src/handlers.py:56
+#: src/handlers.py:52
 msgid "validation.user.incorrect_first_name"
 msgstr ""
 
-#: src/handlers.py:57
+#: src/handlers.py:53
 msgid "validation.user.incorrect_last_name"
 msgstr ""
 
-#: src/handlers.py:58
+#: src/handlers.py:54 src/handlers.py:115
 msgid "validation.user.incorrect_course"
 msgstr ""
 
-#: src/handlers.py:61
+#: src/handlers.py:57 src/handlers.py:113
 msgid "common.help_msg"
 msgstr ""
 
-#: src/handlers.py:77
+#: src/handlers.py:73
 msgid "reg.hello"
 msgstr ""
 
-#: src/handlers.py:87 src/handlers.py:93 src/handlers.py:97
-msgid "reg.incorrect_token"
-msgstr ""
-
-#: src/handlers.py:106
+#: src/handlers.py:85 src/handlers.py:147
 msgid "reg.setup_username"
 msgstr ""
 
-#: src/handlers.py:106 src/handlers.py:113
+#: src/handlers.py:92 src/handlers.py:147
 msgid "reg.ask_first_name"
 msgstr ""
 
-#: src/handlers.py:114
+#: src/handlers.py:96
+msgid "reg.already_registered"
+msgstr ""
+
+#: src/handlers.py:101
 msgid "reg.ask_last_name"
 msgstr ""
 
-#: src/handlers.py:115
+#: src/handlers.py:102
 msgid "reg.ask_course"
 msgstr ""
 
-#: src/handlers.py:116
+#: src/handlers.py:103
 msgid "reg.complete"
+msgstr ""
+
+#: src/handlers.py:133 src/handlers.py:138
+msgid "reg.incorrect_token"
 msgstr ""
 
