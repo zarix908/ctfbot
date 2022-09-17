@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-17 18:26+0500\n"
+"POT-Creation-Date: 2022-09-17 18:37+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "errors.global_exception"
 msgstr ""
 
-#: src/bot.py:28 src/handlers.py:58 src/handlers.py:114
+#: src/bot.py:28 src/handlers.py:64 src/handlers.py:120
 msgid "common.admin_username"
 msgstr ""
 
@@ -37,55 +37,59 @@ msgstr ""
 msgid "admin.command_success"
 msgstr ""
 
-#: src/handlers.py:36
+#: src/handlers.py:39
+msgid "admin.no_free_tokens"
+msgstr ""
+
+#: src/handlers.py:42
 msgid "admin.command_not_found"
 msgstr ""
 
-#: src/handlers.py:52
+#: src/handlers.py:58
 msgid "validation.user.incorrect_first_name"
 msgstr ""
 
-#: src/handlers.py:53
+#: src/handlers.py:59
 msgid "validation.user.incorrect_last_name"
 msgstr ""
 
-#: src/handlers.py:54 src/handlers.py:115
+#: src/handlers.py:60 src/handlers.py:121
 msgid "validation.user.incorrect_course"
 msgstr ""
 
-#: src/handlers.py:57 src/handlers.py:113
+#: src/handlers.py:63 src/handlers.py:119
 msgid "common.help_msg"
 msgstr ""
 
-#: src/handlers.py:73
+#: src/handlers.py:79
 msgid "reg.hello"
 msgstr ""
 
-#: src/handlers.py:85 src/handlers.py:147
+#: src/handlers.py:91 src/handlers.py:153
 msgid "reg.setup_username"
 msgstr ""
 
-#: src/handlers.py:92 src/handlers.py:147
+#: src/handlers.py:98 src/handlers.py:153
 msgid "reg.ask_first_name"
 msgstr ""
 
-#: src/handlers.py:96
+#: src/handlers.py:102
 msgid "reg.already_registered"
 msgstr ""
 
-#: src/handlers.py:101
+#: src/handlers.py:107
 msgid "reg.ask_last_name"
 msgstr ""
 
-#: src/handlers.py:102
+#: src/handlers.py:108
 msgid "reg.ask_course"
 msgstr ""
 
-#: src/handlers.py:103
+#: src/handlers.py:109
 msgid "reg.complete"
 msgstr ""
 
-#: src/handlers.py:133 src/handlers.py:138
+#: src/handlers.py:139 src/handlers.py:144
 msgid "reg.incorrect_token"
 msgstr ""
 

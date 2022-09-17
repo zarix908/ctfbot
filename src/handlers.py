@@ -32,6 +32,13 @@ def handle_admin_command(bot, user, message):
             )
             db.session.commit()
         bot.send_message(chat_id, _('admin.command_success'))
+    elif text == '/get_token':
+        with bot.db_context():
+            token = TokenEntity.query.filter(TokenEntity.free == True).first()
+        if not token:
+            bot.send_message(chat_id, _('admin.no_free_tokens'))
+            return
+        bot.send_message(chat_id, token.token)
     else:
         bot.send_message(chat_id, _('admin.command_not_found'))
 
