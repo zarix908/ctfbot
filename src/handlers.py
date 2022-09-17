@@ -64,7 +64,7 @@ def handle_registration(bot, user, message):
 
             token_entity = TokenEntity.query.get(token)
 
-            if not token:
+            if not token_entity:
                 bot.send_message(chat_id, _('reg.incorrect_token'))
 
             if not token_entity.free:
