@@ -6,7 +6,7 @@ from .dict_mixin import DictMixin
 class UserEntity(db.Model, DictMixin):
     __tablename__ = 'users'
 
-    tg_id = db.Column(db.Integer, primary_key=True)
+    tg_id = db.Column(db.String(20), primary_key=True)
     tg_username = db.Column(db.String)
     tg_first_name = db.Column(db.String)
     tg_last_name = db.Column(db.String)

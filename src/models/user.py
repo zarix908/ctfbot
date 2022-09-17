@@ -21,7 +21,7 @@ class User(BaseModel):
     class Config:
         validate_assignment = True
 
-    tg_id: int
+    tg_id: str
     tg_username: Optional[str] = Field(None)
     tg_first_name: Optional[str] = Field(None)
     tg_last_name: Optional[str] = Field(None)
