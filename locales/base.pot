@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-17 16:06+0500\n"
+"POT-Creation-Date: 2022-09-17 16:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,27 +61,27 @@ msgstr ""
 msgid "reg.hello"
 msgstr ""
 
-#: src/handlers.py:87 src/handlers.py:93 src/handlers.py:96
+#: src/handlers.py:87 src/handlers.py:93 src/handlers.py:97
 msgid "reg.incorrect_token"
 msgstr ""
 
-#: src/handlers.py:105
+#: src/handlers.py:106
 msgid "reg.setup_username"
 msgstr ""
 
-#: src/handlers.py:105 src/handlers.py:112
+#: src/handlers.py:106 src/handlers.py:113
 msgid "reg.ask_first_name"
 msgstr ""
 
-#: src/handlers.py:113
+#: src/handlers.py:114
 msgid "reg.ask_last_name"
 msgstr ""
 
-#: src/handlers.py:114
+#: src/handlers.py:115
 msgid "reg.ask_course"
 msgstr ""
 
-#: src/handlers.py:115
+#: src/handlers.py:116
 msgid "reg.complete"
 msgstr ""
 

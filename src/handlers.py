@@ -81,31 +81,7 @@ def handle_registration(bot, user, message):
         user_entity = UserEntity.query.get(user.tg_id)
 
         if not user_entity:
-            try:
-                token = str(uuid.UUID(text))
-            except ValueError:
-                bot.send_message(chat_id, _('reg.incorrect_token'))
-                return
-
-            token_entity = TokenEntity.query.get(token)
-
-            if not token_entity:
-                bot.send_message(chat_id, _('reg.incorrect_token'))
-                return
-
-            if not token_entity.free:
-                bot.send_message(chat_id, _('reg.incorrect_token'))
-                return
-
-            token_entity.free = False
-            user_entity = UserEntity(**dict(user))
-            user_entity.token = token
-            db.session.add(user_entity)
-            db.session.commit()
-
-            response_msg = _('reg.setup_username') if user.state == UserState.SETUP_USERNAME else _(
-                'reg.ask_first_name')
-            bot.send_message(chat_id, response_msg)
+            handle_token_input(bot, user, chat_id, text)
             return
 
         user = User(**user_entity.dict())
@@ -115,11 +91,46 @@ def handle_registration(bot, user, message):
             RegistrationStep('last_name', _('reg.ask_course')),
             RegistrationStep('course', _('reg.complete'))
         ]
+        value = text
+        if user_entity.state == UserState.READ_COURSE:
+            try:
+                value = int(text, 10)
+            except ValueError:
+                help_msg = _('common.help_msg')
+                username_msg = _('common.admin_username')
+                incorrect_course_msg = _('validation.user.incorrect_course')
+                msg = f'{incorrect_course_msg} {help_msg} {username_msg} @{config.admin_username}.'
+                bot.send_message(chat_id, msg)
+                return
+
         response_msg = steps[user_entity.state.value]. \
-            input(user, int(text) if user_entity.state == UserState.READ_COURSE else text)
+            input(user, value if user_entity.state == UserState.READ_COURSE else text)
         user.state = UserState(user.state.value + 1)
 
         mappers.user.update_entity(user_entity, user)
         db.session.commit()
 
+    bot.send_message(chat_id, response_msg)
+
+
+def handle_token_input(bot, user, chat_id, text):
+    try:
+        token = str(uuid.UUID(text))
+    except ValueError:
+        bot.send_message(chat_id, _('reg.incorrect_token'))
+        return
+
+    token_entity = TokenEntity.query.get(token)
+    if not token_entity or not token_entity.free:
+        bot.send_message(chat_id, _('reg.incorrect_token'))
+        return
+
+    token_entity.free = False
+    user_entity = UserEntity(**dict(user))
+    user_entity.token = token
+    db.session.add(user_entity)
+    db.session.commit()
+
+    response_msg = _('reg.setup_username') if user.state == UserState.SETUP_USERNAME else _(
+        'reg.ask_first_name')
     bot.send_message(chat_id, response_msg)

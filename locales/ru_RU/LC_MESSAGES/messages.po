@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-17 16:06+0500\n"
+"POT-Creation-Date: 2022-09-17 16:39+0500\n"
 "PO-Revision-Date: 2021-12-28 23:02+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru_RU\n"
@@ -66,36 +66,39 @@ msgstr "Если возникли проблемы, обратись к адми
 #: src/handlers.py:77
 msgid "reg.hello"
 msgstr ""
-"Привет! Это бот курса 'Основы компьютерной безопасности'. Сначала "
-"необходимо зарегистрироваться на курс. Для выставления зачета, нам нужно "
-"знать ФИО, курс и username в телеграмме."
+"Привет! Это бот курса 'Основы компьютерной безопасности'. В этом году "
+"курс проводится в закрытом формате, чтобы попасть на него необходимо "
+"ввести токен, полученный от организаторов после мотивационного "
+"собеседования. Отправь токен следующим сообщением."
 
-#: src/handlers.py:87 src/handlers.py:93 src/handlers.py:96
+#: src/handlers.py:87 src/handlers.py:93 src/handlers.py:97
 msgid "reg.incorrect_token"
 msgstr ""
 "Доступ запрещен. Введен некорректный токен. Чтобы попасть на курс, нужно "
 "ввести токен, полученный от администраторов."
 
-#: src/handlers.py:105
+#: src/handlers.py:106
 msgid "reg.setup_username"
 msgstr ""
 "У тебя не выставлен username в телеграмме. Чтобы его выставить, нужно "
 "перейти в меню телеграм -> Settings -> Edit profile -> Username и "
 "установить username. После чего отправить боту сообщение 'Установлен'."
 
-#: src/handlers.py:105 src/handlers.py:112
+#: src/handlers.py:106 src/handlers.py:113
 msgid "reg.ask_first_name"
-msgstr "Как тебя зовут? (только имя без фамилии)"
-
-#: src/handlers.py:113
-msgid "reg.ask_last_name"
-msgstr "Напиши фамилию"
+msgstr ""
+"Также для выставления зачета нам понадобится имя, фамилия и курс. Как "
+"тебя зовут? (только имя без фамилии)"
 
 #: src/handlers.py:114
+msgid "reg.ask_last_name"
+msgstr "Напиши фамилию."
+
+#: src/handlers.py:115
 msgid "reg.ask_course"
 msgstr "На каком курсе учишься?"
 
-#: src/handlers.py:115
+#: src/handlers.py:116
 msgid "reg.complete"
 msgstr "Регистрация успешно завершена."
 
