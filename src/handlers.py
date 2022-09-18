@@ -82,14 +82,14 @@ def handle_registration(bot: TgBot, user: User, message: types.Message):
     chat_id = message.json['chat']['id']
     text = message.json['text'].strip()
 
-    if text == START_COMMAND:
-        bot.send_message(chat_id, _('reg.hello'))
-        return
-
     with bot.db_context():
         user_entity: UserEntity = UserEntity.query.get(user.tg_id)
 
         if not user_entity:
+            if text == START_COMMAND:
+                bot.send_message(chat_id, _('reg.hello'))
+                return
+            
             handle_token_input(bot, user, chat_id, text)
             return
 
