@@ -11,10 +11,12 @@ class UserRegistrationState(Enum):
     ASK_FIRST_NAME = 1
     ASK_LAST_NAME = 2
     ASK_COURSE = 3
-    COMPLETE = 4
+    CONFIRM = 4
+    COMPLETE = 5
+    ASK_RESET = 6
 
 
-CYRILLIC_NAME = constr(regex=r'[А-Я]([А-Я]([А-Яа-я])*[- ]?)*')
+CYRILLIC_NAME = constr(regex=r'^([А-Я][А-Яа-я]*[- ]?)([А-Я][А-Яа-я]*[- ]?)*$')
 
 
 class User(BaseModel):

@@ -28,6 +28,8 @@ class TgBot(telebot.TeleBot):
     ):
         if os.getenv('TEST') == '1':
             print(text)
+            if reply_markup:
+                print(reply_markup)
             return
 
         super().send_message(
