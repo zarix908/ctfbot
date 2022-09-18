@@ -1,11 +1,13 @@
 import gettext
 import os
 import time
+from multiprocessing import Process, Queue
 
 from app import app
 from bot import bot
 import db
 from config import config
+from ctfd_client import register_users
 
 
 def run_with_webhook():
@@ -28,12 +30,20 @@ def main():
         languages=['ru_RU']
     ).install()
 
+    user_registration_queue = Queue()
+    p = Process(target=register_users, args=(user_registration_queue,))
+    p.start()
+
+    bot.user_registration_queue = user_registration_queue
+
     db.init(app)
 
     if os.getenv('TEST') == '1':
         app.run('127.0.0.1', 9090)
     else:
         run_with_webhook()
+
+    p.join()
 
 
 if __name__ == '__main__':

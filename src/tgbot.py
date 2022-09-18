@@ -10,6 +10,7 @@ class TgBot(telebot.TeleBot):
         super().__init__(*args, **kwargs)
         self.__db_context = None
         self.__flask_logger = None
+        self.user_registration_queue = None
 
     def setup(self, db_context, flask_logger):
         self.__db_context = db_context

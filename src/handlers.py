@@ -136,6 +136,7 @@ def handle_registration(bot: TgBot, user: User, message: types.Message):
                 user.registration_state = UserRegistrationState.COMPLETE
                 mappers.user.update_entity(user_entity, user)
                 db.session.commit()
+                bot.user_registration_queue.put(user)
                 bot.send_message(chat_id, _('reg.complete'), reply_markup=markup)
             elif text == _('reg.confirm.cancel_button'):
                 user.registration_state = UserRegistrationState.ASK_RESET

@@ -23,8 +23,9 @@ class Config:
     # tg bot
     tg_bot_token: str
 
-    # info
     admin_username: str
+    ctfd_url: str
+    ctfd_token: str
 
 
 def load(filename):
@@ -42,5 +43,7 @@ def load(filename):
         webhook_tls_cert_path=config['webhook']['TLSCertPath'],
         webhook_tls_privkey_path=config['webhook']['TLSPrivateKeyPath'],
         tg_bot_token=config['secrets']['BotToken'],
-        admin_username=config['info']['AdminUsername']
+        admin_username=config['info']['AdminUsername'],
+        ctfd_url=config['info']['CTFdUrl'],
+        ctfd_token=config['secrets']['CTFdToken']
     )
