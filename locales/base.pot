@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-09-18 16:26+0500\n"
+"POT-Creation-Date: 2022-09-18 16:56+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "errors.global_exception"
 msgstr ""
 
-#: src/bot.py:28 src/handlers.py:69 src/handlers.py:117
+#: src/bot.py:28 src/handlers.py:71 src/handlers.py:119
 msgid "common.admin_username"
 msgstr ""
 
@@ -29,107 +29,119 @@ msgstr ""
 msgid "errors.error_id"
 msgstr ""
 
-#: src/handlers.py:30
+#: src/handlers.py:32
 msgid "admin.activated"
 msgstr ""
 
-#: src/handlers.py:38
+#: src/handlers.py:40
 msgid "admin.command_success"
 msgstr ""
 
-#: src/handlers.py:43
+#: src/handlers.py:45
 msgid "admin.no_free_tokens"
 msgstr ""
 
-#: src/handlers.py:47
+#: src/handlers.py:49
 msgid "admin.command_not_found"
 msgstr ""
 
-#: src/handlers.py:63
+#: src/handlers.py:65
 msgid "validation.user.incorrect_first_name"
 msgstr ""
 
-#: src/handlers.py:64
+#: src/handlers.py:66
 msgid "validation.user.incorrect_last_name"
 msgstr ""
 
-#: src/handlers.py:65 src/handlers.py:118
+#: src/handlers.py:67 src/handlers.py:120
 msgid "validation.user.incorrect_course"
 msgstr ""
 
-#: src/handlers.py:68 src/handlers.py:116
+#: src/handlers.py:70 src/handlers.py:118
 msgid "common.help_msg"
 msgstr ""
 
-#: src/handlers.py:84
+#: src/handlers.py:86
 msgid "reg.hello"
 msgstr ""
 
-#: src/handlers.py:98 src/handlers.py:200
+#: src/handlers.py:100 src/handlers.py:209
 msgid "reg.setup_username"
 msgstr ""
 
-#: src/handlers.py:105 src/handlers.py:200
+#: src/handlers.py:107 src/handlers.py:209
 msgid "reg.ask_first_name"
 msgstr ""
 
-#: src/handlers.py:109
+#: src/handlers.py:111
 msgid "reg.already_registered"
 msgstr ""
 
-#: src/handlers.py:133 src/handlers.py:220
+#: src/handlers.py:135 src/handlers.py:229
 msgid "reg.confirm.confirm_button"
 msgstr ""
 
-#: src/handlers.py:137
+#: src/handlers.py:139
 msgid "reg.complete"
 msgstr ""
 
-#: src/handlers.py:138 src/handlers.py:221
+#: src/handlers.py:140 src/handlers.py:230
 msgid "reg.confirm.cancel_button"
 msgstr ""
 
-#: src/handlers.py:142
+#: src/handlers.py:144 src/handlers.py:168
 msgid "reg.ask_confirm_again"
 msgstr ""
 
-#: src/handlers.py:143
+#: src/handlers.py:145 src/handlers.py:169
 msgid "reg.ask_reset"
 msgstr ""
 
-#: src/handlers.py:147
+#: src/handlers.py:149
 msgid "reg.confirm.incorrect_answer"
 msgstr ""
 
-#: src/handlers.py:167
+#: src/handlers.py:158
+msgid "reg.reset"
+msgstr ""
+
+#: src/handlers.py:159
+msgid "reg.begin_with_command"
+msgstr ""
+
+#: src/handlers.py:170
+msgid "reg.incorrect_command"
+msgstr ""
+
+#: src/handlers.py:176
 msgid "reg.ask_last_name"
 msgstr ""
 
-#: src/handlers.py:168
+#: src/handlers.py:177
 msgid "reg.ask_course"
 msgstr ""
 
-#: src/handlers.py:186 src/handlers.py:191
+#: src/handlers.py:195 src/handlers.py:200
 msgid "reg.incorrect_token"
 msgstr ""
 
-#: src/handlers.py:206
+#: src/handlers.py:215
 msgid "reg.confirm.username"
 msgstr ""
 
-#: src/handlers.py:207
+#: src/handlers.py:216
 msgid "reg.confirm.first_name"
 msgstr ""
 
-#: src/handlers.py:208
+#: src/handlers.py:217
 msgid "reg.confirm.last_name"
 msgstr ""
 
-#: src/handlers.py:209
+#: src/handlers.py:218
 msgid "reg.confirm.course"
 msgstr ""
 
-#: src/handlers.py:210
+#: src/handlers.py:219
 msgid "reg.confirm"
 msgstr ""
 

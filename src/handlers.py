@@ -14,8 +14,10 @@ from entities.user import UserEntity
 from models.user import UserRegistrationState, User
 from tgbot import TgBot
 
+START_COMMAND = '/start'
 CONFIRM_COMMAND = '/confirm'
 RESET_COMMAND = '/reset'
+
 
 def handle_admin_command(bot, user, message):
     global _
@@ -26,7 +28,7 @@ def handle_admin_command(bot, user, message):
     chat_id = message.json['chat']['id']
     text = message.json['text'].strip()
 
-    if text == '/start':
+    if text == START_COMMAND:
         bot.send_message(chat_id, _('admin.activated'))
     elif text.startswith('/generate'):
         number = int(text.split()[1])
@@ -80,7 +82,7 @@ def handle_registration(bot: TgBot, user: User, message: types.Message):
     chat_id = message.json['chat']['id']
     text = message.json['text'].strip()
 
-    if text == '/start':
+    if text == START_COMMAND:
         bot.send_message(chat_id, _('reg.hello'))
         return
 
@@ -147,21 +149,28 @@ def handle_registration(bot: TgBot, user: User, message: types.Message):
                 bot.send_message(chat_id, _('reg.confirm.incorrect_answer'))
             return
 
-        # if user_entity.registration_state == UserRegistrationState.ASK_RESET:
-        #     if text == '/reset':
-        #         token_entity = TokenEntity.query.get(user_entity.token)
-        #         user_entity.delete()
-        #         token_entity.free = True
-        #         db.session.commit()
-        #         bot.send_message(chat_id, _('reg.reset'))
-        #     elif text == '/confirm':
-        #         user.registration_state = UserRegistrationState.CONFIRM
-        #         mappers.user.update_entity(user_entity, user)
-        #         db.session.commit()
-        #         bot.send_message(chat_id, **build_confirm_msg(user_entity))
-        #     else:
-        #         bot.send_message(chat_id, _('reg.incorrect_command'))
-        #     return
+        if user_entity.registration_state == UserRegistrationState.ASK_RESET:
+            if text == RESET_COMMAND:
+                token_entity = TokenEntity.query.get(user_entity.token)
+                user_entity.query.delete()
+                token_entity.free = True
+                db.session.commit()
+                reset_msg = _('reg.reset')
+                begin_with_command = _('reg.begin_with_command')
+                msg = f'{reset_msg} {begin_with_command} {START_COMMAND}.'
+                bot.send_message(chat_id, msg)
+            elif text == CONFIRM_COMMAND:
+                user.registration_state = UserRegistrationState.CONFIRM
+                mappers.user.update_entity(user_entity, user)
+                db.session.commit()
+                bot.send_message(chat_id, **build_confirm_msg(user_entity))
+            else:
+                confirm_again_msg = _('reg.ask_confirm_again')
+                reset_msg = _('reg.ask_reset')
+                incorrect_command_msg = _('reg.incorrect_command')
+                msg = f'{incorrect_command_msg} {confirm_again_msg} {CONFIRM_COMMAND}. {reset_msg} {RESET_COMMAND}.'
+                bot.send_message(chat_id, msg)
+            return
 
         steps = [
             RegistrationStep('first_name', _('reg.ask_last_name')),
