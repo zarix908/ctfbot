@@ -5,7 +5,7 @@ services:
     build:
       context: .
     ports:
-      - 127.0.0.1:9090:9090
+      - 0.0.0.0:8443:8443
   postgres:
     image: postgres:14.0
     ports:
