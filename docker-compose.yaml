@@ -6,6 +6,8 @@ services:
       context: .
     ports:
       - 0.0.0.0:8443:8443
+    depends_on:
+      - postgres
   postgres:
     image: postgres:14.0
     ports:
@@ -15,7 +17,4 @@ services:
       POSTGRES_PASSWORD: ctfbot
       POSTGRES_DB: ctfbot
     volumes:
-      - db-volume:/var/lib/postgresql/data
-
-volumes:
-  db-volume:
+      - .data/postgres:/var/lib/postgresql/data
