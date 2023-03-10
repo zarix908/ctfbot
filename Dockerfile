@@ -11,4 +11,4 @@ COPY locales locales
 COPY notprovide notprovide
 COPY src src
 
-CMD ["python", "src/main.py"]
+CMD ["python", "-u", "src/main.py"]
