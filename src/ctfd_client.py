@@ -37,7 +37,7 @@ def register_users(users):
                 f'{config.ctfd_url}/telegram/register',
                 headers={'Authorization': f'Token {config.ctfd_token}'},
                 json=req,
-                verified=False
+                verify=False
             )
             if not r.ok:
                 print(
