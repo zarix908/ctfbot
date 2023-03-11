@@ -153,7 +153,7 @@ def handle_registration(bot: TgBot, user: User, message: types.Message):
         if user_entity.registration_state == UserRegistrationState.ASK_RESET:
             if text == RESET_COMMAND:
                 token_entity = TokenEntity.query.get(user_entity.token)
-                user_entity.query.delete()
+                db.session.query(UserEntity).filter(UserEntity.tg_id == user_entity.tg_id).delete()
                 token_entity.free = True
                 db.session.commit()
                 reset_msg = _('reg.reset')
